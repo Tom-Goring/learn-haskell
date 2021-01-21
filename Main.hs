@@ -2,7 +2,7 @@
 
 module Main where
 
-dupli :: [a] -> [a]
-dupli = concatMap(replicate 2)
+dupli :: [a] -> Int -> [a]
+dupli xs n = concatMap(replicate n) xs
 
-main = print(dupli [1, 2, 3])
+main = print(dupli "abc" 3)
