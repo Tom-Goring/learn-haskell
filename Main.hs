@@ -19,4 +19,10 @@ encode = map encodeHelper . encode'
         encodeHelper (1, x) = Single x
         encodeHelper (n, x) = Multiple n x
 
-main = print(encode "aaaabbbbcddddd")
+decode :: Eq a => [ListItem a] -> [a]
+decode = concatMap decodeHelper
+    where
+        decodeHelper (Single x) = [x]
+        decodeHelper (Multiple n x) = replicate n x
+
+main = print(decode [Multiple 4 'a', Single 'b', Multiple 2 'c'])
