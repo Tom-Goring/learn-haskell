@@ -2,11 +2,14 @@
 
 module Main where
 
-slice :: [a] -> Int -> Int -> [a]
-slice [] _ _ = []
-slice xs i j
-  | i == j = []
-  | i > j = error "Cannot produce slice of negative length"
-  | otherwise = [x | (x, k) <- zip xs [0, 1..], k >= i && k <= j]
+rotate :: [a] -> Int -> [a]
+rotate [] _ = []
+rotate xs n 
+  | n > 0 = [x | (x, idx) <- l, idx >= n'] ++ [x | (x, idx) <- l, idx < n']
+  | n < 0 = [x | (x, idx) <- l,  idx >= len - n'] ++ [x | (x, idx) <- l, idx < len - n']
+    where 
+        l = zip xs [0, 1..]
+        n' = abs n `mod` len
+        len = length xs
 
-main = print(slice "abcdefghik" 2 4)
+main = print(rotate "abcdefgh" (-2))
