@@ -2,7 +2,7 @@
 
 module Main where
 
-dupli :: [a] -> Int -> [a]
-dupli xs n = concatMap(replicate n) xs
+dropEvery :: [a] -> Int -> [a]
+dropEvery xs n = [x | (x, idx) <- zip xs [0, 1..], mod (idx+1) n /= 0 ]
 
-main = print(dupli "abc" 3)
+main = print(dropEvery "abcdefghik" 3)
