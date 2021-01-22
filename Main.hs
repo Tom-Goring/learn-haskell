@@ -2,14 +2,8 @@
 
 module Main where
 
-rotate :: [a] -> Int -> [a]
-rotate [] _ = []
-rotate xs n 
-  | n > 0 = [x | (x, idx) <- l, idx >= n'] ++ [x | (x, idx) <- l, idx < n']
-  | n < 0 = [x | (x, idx) <- l,  idx >= len - n'] ++ [x | (x, idx) <- l, idx < len - n']
-    where 
-        l = zip xs [0, 1..]
-        n' = abs n `mod` len
-        len = length xs
+removeAt :: [a] -> Int -> [a]
+removeAt xs n = [x | (x, i) <- l, i /= n] 
+    where l = zip xs [0, 1..]
 
-main = print(rotate "abcdefgh" (-2))
+main = print(removeAt "abcdefgh" 1)
