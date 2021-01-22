@@ -2,8 +2,8 @@
 
 module Main where
 
-removeAt :: [a] -> Int -> [a]
-removeAt xs n = [x | (x, i) <- l, i /= n] 
-    where l = zip xs [0, 1..]
+insert :: [a] -> a -> Int -> [a]
+insert xs a n = ys ++ [a] ++ zs
+    where (ys, zs) = splitAt n xs
 
-main = print(removeAt "abcdefgh" 1)
+main = print(insert "abcdefgh" 'a' 0)
