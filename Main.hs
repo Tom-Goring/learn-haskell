@@ -2,8 +2,7 @@
 
 module Main where
 
-insert :: [a] -> a -> Int -> [a]
-insert xs a n = ys ++ [a] ++ zs
-    where (ys, zs) = splitAt n xs
+listBetween :: Int -> Int -> [Int]
+listBetween x y = [x, x+1..y]
 
-main = print(insert "abcdefgh" 'a' 0)
+main = print(listBetween 4 9)
