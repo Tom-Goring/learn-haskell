@@ -12,7 +12,10 @@ randomElement xs = do
 randomElements :: [a] -> Int -> IO [a]
 randomElements xs n = replicateM n $ randomElement xs
 
+randomPermutation :: [a] -> IO [a]
+randomPermutation xs = replicateM (length xs) $ randomElement xs
+
 main :: IO ()
 main = do
-    xs <- randomElements [0, 1..200] 20
+    xs <- randomPermutation "abcdef"
     print xs
