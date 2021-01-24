@@ -2,7 +2,17 @@
 
 module Main where
 
-listBetween :: Int -> Int -> [Int]
-listBetween x y = [x, x+1..y]
+import Control.Monad.Random
 
-main = print(listBetween 4 9)
+randomElement :: [Int] -> IO Int
+randomElement xs = do
+    n <- randomRIO (0, 10) :: IO Int
+    return (xs !! n)
+
+randomElements :: [Int] -> Int -> IO [Int]
+randomElements xs n = replicateM n $ randomElement xs
+
+main :: IO ()
+main = do
+    xs <- randomElements [1, 2..20] 3
+    print xs
