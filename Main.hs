@@ -2,20 +2,21 @@
 
 module Main where
 
-import Control.Monad.Random
+import Data.List
 
-randomElement :: [a] -> IO a
-randomElement xs = do
-    n <- randomRIO (0, length xs) :: IO Int
-    return (xs !! n)
+combinations :: [a] -> Int -> [[a]]
+combinations xs 0 = [[]]
+combinations [] _ = []
+combinations (x:xs) n = map (x:) (combinations xs (n-1)) ++ combinations xs n
 
-randomElements :: [a] -> Int -> IO [a]
-randomElements xs n = replicateM n $ randomElement xs
+main = print $ combinations "abc" 2
 
-randomPermutation :: [a] -> IO [a]
-randomPermutation xs = replicateM (length xs) $ randomElement xs
-
-main :: IO ()
-main = do
-    xs <- randomPermutation "abcdef"
-    print xs
+-- combinations "xxx" == "xxx"
+-- create all of first character and all other characters (i.e. abcd -> ab, ac, ad)
+-- create all of second character and all characters but first as we already did that (i.e. abcd -> bc, bd)
+-- create all of third character and all characters but first and second as we already did that (i.e. abcd -> cd)
+-- so for combinations "abcd" 3
+-- we find all combs of bcd 2 -> bc, bd, cd; append a to the start:
+-- abc, abd, acd
+-- then add the tail of the origin list for the final combination:
+-- abc, abd, acd, bcd
